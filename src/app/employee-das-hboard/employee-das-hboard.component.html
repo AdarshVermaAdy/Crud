@@ -1,0 +1,84 @@
+<nav class="navbar navbar-dark bg-sucess">
+    <div class="container-fluid">
+    <h1 style="color:rgb(3, 12, 20) ; font-size: 20px;">Angular 13 CRUD</h1>
+<div class="d-flex">  
+    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="mymodel">
+</div>
+    <div class="d-flex">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee </button>
+    </div>
+</div>
+</nav>
+
+<table class="table mt-4">
+    <thead>
+        <tr >
+            <th scope="col">ID Number</th>
+            <th scope="col"> Name</th>
+            <th scope="col"> Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of employdata | filter: mymodel |paginate: { itemsPerPage: 10, currentPage: p } let i=index;">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobile}}</td>
+              <td>{{row.salary}}</td>
+            <td>
+                <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getsinglerecord(row.email)">Edit</button>&nbsp;
+                <button class="btn btn-danger" (click)="DeleteEmployedetails(row.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #content>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Employee Details</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="reactForm">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="email" class="form-control" formControlName="name">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Mobile</label>
+                <input type="number" class="form-control" formControlName="mobile">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Salary</label>
+                <input type="number" class="form-control" formControlName="salary">
+              </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="PostEmployedetails()" class="btn btn-success">Save</button>
+          <button type="button" (click)="EditEmployedetails()" class="btn btn-primary" >Edit</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>

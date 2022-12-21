@@ -1,0 +1,184 @@
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+  
+                  <form [formGroup]="myForm"> 
+                  <div class="mx-1 mx-md-4">
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="text" id="form3Example1c" class="form-control"  formControlName = "name"/>
+                        <label class="form-label" for="form3Example1c">Your Name</label>
+                        <div *ngIf=" fn['name'].touched && fn['name'].invalid" style="color: red;">
+                          <div *ngIf = "fn['name'].errors && fn['name'].errors['required']">Name is required</div>
+                          <div *ngIf = "fn['name'].errors && fn['name'].errors['minlength']">Name should be greater than 3 Character</div>
+                       </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="email" id="form3Example3c" class="form-control" formControlName = "email" />
+                        <label class="form-label" for="form3Example3c">Your Email</label>
+                        <div *ngIf=" fn['email'].touched && fn['email'].invalid" style="color: red;">
+                          <div *ngIf = "fn['email'].errors && fn['email'].errors['required']">Email is required</div>
+                          <div *ngIf = "fn['email'].errors && fn['email'].errors['email']">Email is invalid</div>
+
+                       </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4c" class="form-control" formControlName = "password" />
+                        <label class="form-label" for="form3Example4c">Password</label>
+                        <div *ngIf=" fn['password'].touched && fn['password'].invalid" style="color: red;">
+                          <div *ngIf = "fn['password'].errors && fn['password'].errors['required']">Password is required</div>
+                          <div *ngIf = "fn['password'].errors && fn['password'].errors['minlength']">Password length must be greater than 6 </div>
+
+                       </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input type="password" id="form3Example4cd" class="form-control" formControlName="confirmPassword"/>
+                        <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                        <div *ngIf=" fn['confirmPassword'].touched && fn['confirmPassword'].invalid" style="color: red;">
+                          <div *ngIf = "fn['confirmPassword'].errors && fn['confirmPassword'].errors['required']">Password is required</div>
+                          <div *ngIf = "fn['confirmPassword'].errors && fn['confirmPassword'].errors['minlength']">Password length must be greater than 6 </div>
+                          <div *ngIf = "fn['confirmPassword'].errors && fn['confirmPassword'].errors['confirmPasswordValidator']">Password must be same</div>
+
+                       </div>
+                      </div>
+                    </div>
+  
+                    <div class="form-check d-flex justify-content-center mb-5">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                      <label class="form-check-label" for="form2Example3">
+                        I agree all statements in <a href="http://www.africau.edu/images/default/sample.pdf">Terms of service</a>
+                      </label>
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+
+                      <button mat-button class="btn btn-primary btn-sm" (click)="PostUserdetails()">Register</button>&nbsp;
+                      <button mat-button class="btn btn-success btn-sm" (click)="openDialog()">Back to Login</button>
+
+                    </div>
+                   </div>
+                  </form>
+  
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+  
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    class="img-fluid" alt="Sample image">
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<!-- 
+
+  <nav class="navbar navbar-dark bg-sucess">
+    <div class="container-fluid">
+    <h1 style="color:rgb(3, 12, 20) ; font-size: 20px;">Angular 13 CRUD</h1>
+<div class="d-flex">  
+    <input type="text" class="form-control" placeholder="Search Here" [(ngModel)]="mymodel">
+</div>
+    <div class="d-flex">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee </button>
+    </div>
+</div>
+</nav>
+
+<table class="table mt-4">
+    <thead>
+        <tr >
+            <th scope="col">ID Number</th>
+            <th scope="col"> Name</th>
+            <th scope="col"> Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of employdata | filter: mymodel |paginate: { itemsPerPage: 10, currentPage: p } let i=index;">
+            <td>{{row.id}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobile}}</td>
+              <td>{{row.salary}}</td>
+            <td>
+                <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getsinglerecord(row.email)">Edit</button>&nbsp;
+                <button class="btn btn-danger" (click)="DeleteEmployedetails(row.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #content>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Employee Details</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form [formGroup]="reactForm">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Name</label>
+                <input type="email" class="form-control" formControlName="name">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Mobile</label>
+                <input type="number" class="form-control" formControlName="mobile">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Salary</label>
+                <input type="number" class="form-control" formControlName="salary">
+              </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="PostEmployedetails()" class="btn btn-success">Save</button>
+          <button type="button" (click)="EditEmployedetails()" class="btn btn-primary" >Edit</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <pagination-controls (pageChange)="p = $event"></pagination-controls> --> -->
